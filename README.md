@@ -5,13 +5,13 @@ Replace mouse operation, Simply repeat action.
 ## Requirements
 
 - OS : Windows 10 / 11
-- Autohotkey : H-2.0-beta.3 ( @ [thqby/AutoHotkey_H](https://github.com/thqby/AutoHotkey_H.git) , or download from my release which complied yet)
-- My Time At Portia Version : final 2.0.141541 (last updated time : 2021 / 08)
-- Game Resolution : `1680 * 1050` (only)
+- Autohotkey : H-2.0-beta.3 ( @ [thqby/AutoHotkey_H](https://github.com/thqby/AutoHotkey_H.git) )
+- My Time At Portia Version : final 2.0.141541 ( last updated time : 2021 / 08 )
+- Game Resolution : `1680 * 1050` ( only )
 
 ## Install
 
-1. download `.zip` package from lastest [Releases](https://github.com/miozus/MyTimeAtPortiaKeymap/releases/latest)    and unzip
+1. download `.zip` package from lastest [Releases](https://github.com/miozus/MyTimeAtPortiaKeymap/releases/latest) and unzip
 
 Or
 
@@ -26,15 +26,15 @@ git clone https://github.com/miozus/MyTimeAtPortiaKeymap.git
      - [x] Resolution must be `1680 * 1050` at window mode
      - [x] Lens inertia must be checked, for scene move with fluent perfomance
 4. open `Portia.ahk` with Autohotkey.exe ( win32 or x64w )
-5. run Game and play
+5. play game ( the order of launcher does not matter )
 
 ## Usage
 
-keyboard maping:
+My keyboard maping (default)
 
 ![portiakeymap](docs/img/portiakeymap.png)
 
-design notes will be release soon.
+Design notes will be release soon.
 
 Game demo video is making.
 
