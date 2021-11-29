@@ -3,8 +3,8 @@
 
 class Element {
 
-    ; 备忘录模式：记录一次最后的参数，实现前进和后退，并轮询机制
-    static final := 1
+    ; 备忘录模式：记录一次最后的参数，实现前进和后退，和轮播机制
+    static final :=1
 
     static next() {
         this.final++ 
@@ -804,9 +804,10 @@ class GameMouse  {
     ;    解决：+ 修饰的 hjkl 是另一套组合键，给鼠标控制 * 最广范围的权限，可以叠加任何按键，充分发挥键位无冲
     ; 3. 设置鼠标延迟为 -1 ，过度自然
     static move(event, offset := 97) {
+        offset := GameSetting.Mouse.quickSpeed
         if GetKeyState("a", "p")
         {
-            OFFSET := 35
+            offset := GameSetting.Mouse.slowSpeed
         }
         switch (event)
         {
@@ -1044,27 +1045,27 @@ class WorkState {
         SetTimer () => ToolTip(), -2000
     }
     
-    ; 继续
+    
+    ; 主要技能
     ; @param param* 一个可选参数：可以是数组/字符串，可以无参数，但不能传两个比如 (3，5)
-    static proceed(param*) {
-        this.states[this.final]["action"].proceed(param*)
+    static main(param*) {
+        this.states[this.final]["action"].main(param*)
     }
     
-    ; 开始
+    ; 辅助技能
     ; @param param* 一个可选参数：可以是数组/字符串，可以无参数，但不能传两个比如 (3，5)
-    static start(param*) {
-        this.states[this.final]["action"].start(param*)
+    static assist(param*) {
+        this.states[this.final]["action"].assist(param*)
     }
     
-    
-    ; 需要交给上下文管理，只要实现这些接口
+    ; 需要交给上下文管理，只要实现这些接口（伪接口，仅提供工厂模板）
     class Interface {
 
         ; 工厂模板：交给上下文管理的状态动作
-        static start() {
+        static main() {
         }
         
-        static proceed() {
+        static assist() {
         }
         
     }
@@ -1075,11 +1076,11 @@ class WorkState {
     class Farmer {
 
         ; 工厂模板：交给上下文管理的状态动作
-        static start() {
+        static main() {
             this.searchMineral()
         }
         
-        static proceed() {
+        static assist() {
             this.farmLoop()
         }
             
@@ -1118,16 +1119,16 @@ class WorkState {
     ; 状态栏放饭团，按数字键 N 则喂养 N 对成鱼
     class Fisher {
         
-        ; 放入 10 条鱼
-        static start() {
+        ; 放入 +10 条鱼
+        static main() {
             loop 10 {
                 GameMouse.button("🖱️")
                 Sleep 1500
             }
         }
 
-        ; 取走 5 条鱼
-        static proceed() {
+        ; 取走 -5 条鱼
+        static assist() {
            loop 5 {
                 Send GameSetting.Keyboard.interactive
                 Sleep 400
@@ -1159,11 +1160,11 @@ class WorkState {
     class Hoster {
 
         ; 工厂模板：交给上下文管理的状态动作
-        static start() {
+        static main() {
             Factory.startWorking()
         }
         
-        static proceed() {
+        static assist() {
             Factory.coninueWorking()
         }
     }
@@ -1678,3 +1679,4 @@ class Scene {
         return this.isBag() or this.isBox() or this.isShop() or this.isMaterialWare() 
     }
 }
+

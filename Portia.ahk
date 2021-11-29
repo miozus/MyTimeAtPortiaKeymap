@@ -4,9 +4,9 @@
 SendMode "Input"	                            ; 快
 SetWorkingDir A_ScriptDir        	            ; 脚本主页
 #Hotif WinActive("ahk_exe Portia.exe")          ; 游戏窗口内生效，其它环境不生效
-SetMouseDelay -1	                            ; 鼠标上下左右，仅winAPI生效，但没有真的鼠标控制丝滑（鼠标延迟默认10，改成-1就好了）
+SetMouseDelay -1	                            ; 鼠标上下左右，仅 winAPI 生效，但没有真的鼠标控制丝滑（鼠标延迟默认10，改成-1就好了）
 CoordMode "Pixel", "Window"                     ; 取色相对于窗口    
-#include PortiaFunctions.ahk         ; 游戏配置和缓存：优先查询数据，找不到再计算
+#include PortiaFunctions.ahk                    ; 所有实现功能的源码
 bagCounter := Counter(972, 512, 0)              ; 计数器坐标：背包/工作台/商店; 首次运行创建，关闭脚本时销毁
 workCounter := Counter(1000, 584, 1)
 factoryCounter := Counter(990, 620, 2)
@@ -15,8 +15,8 @@ factoryCounter := Counter(990, 620, 2)
 #SuspendExempt True
 ; 变身形态
 .:: WorkState.next()
-W:: WorkState.start()
-T:: WorkState.proceed()
+W:: WorkState.main()
+T:: WorkState.assist()
 Q:: Bag.quickSortItems()
 !^E:: Actor.haveDinner()
 Y::   Actor.doMisterySwordAttack()
@@ -84,15 +84,17 @@ class GameSetting {
         static itemBarColumns := 8
         ; 产品每页显示个数（分辨率高会显示更多）
         static PageSize := 6
-        ; 屏幕分辨率 1680 * 1050 
+        ; 屏幕分辨率（必须） 1680 * 1050 
     }
+    
+    
      
     ; 键位设置
     class Keyboard {
         ; 替换背包物品
         static exchange := "g"
         ; 探宝: 或抱起物品
-        static searchMineral := "u"
+        static seekingTreasures := "u"
         ; 交互
         static interactive := "r"
         ; 推荐设置
@@ -105,4 +107,11 @@ class GameSetting {
         static RClick := "o"
         static switchMonsterTarget := "Alt"
     }
+    
+    ; 鼠标移动速度
+    class Mouse {
+        static quickSpeed := 97
+        static slowSpeed := 35
+    }
 }
+
