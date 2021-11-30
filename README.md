@@ -25,8 +25,8 @@ git clone https://github.com/miozus/MyTimeAtPortiaKeymap.git
    - GameSetting : write down what you set in game.
    - Keymap : `yourHotkey::function()` , you can define new function in `PortiaFuntions.ahk`
 3. Setting In Game :
-    - [x] Resolution must be `1680 * 1050` at window mode.
-    - [x] Lens inertia must be checked, for move mouse with fluent perfomance.
+   - [x] Resolution must be `1680 * 1050` at window mode.
+   - [x] Lens inertia must be checked, for move mouse with fluent perfomance.
 3. open `Portia.ahk` with Autohotkey.exe ( win32 or x64w ) , run with **Administrator privilige** if hotkey not works in game. ( usually, normal privilige is OK ).
 4. play game ( the order of launcher does not matter ).
 
@@ -34,29 +34,29 @@ git clone https://github.com/miozus/MyTimeAtPortiaKeymap.git
 
 ### 1 🏃‍♀️ Direction
 
-Actor Move Direction:
+Actor Move 4 Directions:
 
 | | Actor| | | | Mouse | |
 |:----: | :----: | :----: | :----: | :----: | :----:| :---- |
 || <kbd>E</kbd>|||| <kbd>K</kbd>
 |<kbd>S</kbd>|<kbd>D</kbd>|<kbd>F</kbd>| | <kbd>H</kbd> | <kbd>J</kbd> | <kbd>L</kbd>
 
-Press <kbd>/</kbd> to resize actor's perspective to focus on forehead.
+Press <kbd>/</kbd> : Resize actor's perspective to focus on forehead.
 
-Hold on <kbd>A</kbd> while press mouse hotkey, to slow down mouse move speed, it performance well on bag UI.
+Hold on <kbd>A</kbd> : While press mouse hotkey, to slow down mouse move speed, it performance well on bag UI.
 
 Mouse :
 
-| from| <kbd>I</kbd>|<kbd>O</kbd> | <kbd>;</kbd> | <kbd>'</kbd>
+| From| <kbd>I</kbd>|<kbd>O</kbd> | <kbd>;</kbd> | <kbd>'</kbd>
 |:----: | :----: | :----:| :----: | :----: |
-| to |LeftButton |RightButton|Scroll down | Scroll up |
-| tips| ||ProductUI ⇒ *5 times | same
+| To |LeftButton |RightButton|Scroll down | Scroll up |
+| Tips| ||ProductUI ⇒ *5 times | the same
 
 Turn Page:
 
-Press <kbd>S</kbd> or <kbd>F</kbd> to turn page, When there are left or right button at Page UI. ( except BagUI case of poverty to release all grids )
+Press <kbd>S</kbd> / <kbd>F</kbd> :  Turn page, When there are left or right button at Page UI. ( except BagUI case of poverty to release all grids )
 
-Press <kbd>E</kbd> or <kbd>D</kbd> would depend on what `3 📦 Item Select` have done, to do previous or next action.
+Press <kbd>E</kbd> / <kbd>D</kbd> : Depend on what `3 📦 Item Selector` have done, to do previous or next action.
 
 ### 2 ⛏️ Work State
 
@@ -68,42 +68,44 @@ Each state has two skills, they aim to do one work together.
 | 🐟     | Fisher | fish +5                | fish -10            | number 1~5 ⇒ feed n*35 rice                           |
 | ⛏️     | Farmer | LButtonClickLoop       | seekingTreasures    | Eletic Drill prefer to use mouse or hold <kbd>I</kbd> |
 
-Press <kbd>.</kbd> to turn to next state for cycle.
+Press <kbd>.</kbd> : Turn to next state for cycle.
 
 ### 3 📦 Item Selector
 
-When different UI appears, it perfomance differently.
+When different UI appears, hotkey presents suitably itself.
 
 Default ( Outside )
 
-| Hotkey                      | MapPosition | Tips      |
-| :------                     | :------     | :------   |
-| <kbd>1</kbd> ~ <kbd>8</kbd> | [1, 1-8]    | Equipment |
+| Hotkey                      | Maping | Tips             |
+| :------                     | :------     | :------          |
+| <kbd>1</kbd> ~ <kbd>P</kbd> | ( null )      | origin key |
 
 BagUI
 
-| Hotkey                                              | MapPosition | Tips           |
+| Hotkey                                              | Maping Position | Tips           |
 | :------                                             | :------     | :------        |
 | <kbd>1</kbd> ~ <kbd>8</kbd>                         | [1-8, 1]    | 1st row        |
-| <kbd>9</kbd> <kbd>0</kbd> <kbd>-</kbd> <kbd>=</kbd> | [1-8, 2-5]  | the [2, 5] row |
-| <kbd>P</kbd>                                        | [1-8, P]    | Equipment bar  |
+| <kbd>9</kbd> <kbd>0</kbd> <kbd>-</kbd> <kbd>=</kbd> | [1-8, 2-5]  | the 2 ~ 5 row, like climb down ladder |
+| <kbd>P</kbd>                                        | [1-8, P]    | equipment bar  |
+
+Press <kbd>Q</kbd> : Quick Sort Bag and Box's Items, and hover on the center fo Box.
 
 ListUI
 
-| Hotkey                      | MapPosition | Tips |
+| Hotkey                      | Maping Position | Tips |
 | :------                     | :------     | :------ |
 | <kbd>1</kbd> ~ <kbd>8</kbd> | [1, 1-8]    | N's product       |
 
-Specially, when you hold modifier key above all, it follow secondary action.
+Specially, when you hold on modifier key above all, it follows secondary action.
 
-|Modifier       | Hotkey                      | MapPosition | Tips                                    |
+|Modifier       | Hotkey                      | Maping Position | Tips                                    |
 |:----          | :------                     | :------     | :------                                 |
 |<kbd>Ctrl</kbd>| <kbd>1</kbd> ~ <kbd>P</kbd> | [1-8, N]    | And Press Exchange ( to bag )           |
 |<kbd>Alt</kbd> | <kbd>1</kbd> ~ <kbd>P</kbd> | [1-8, N]    | And Press RightButton ( to box / actor )|
 
-### 4 🤖 Not Intelligent Robot
+### 4 🤖 Unitelligent Robot
 
-Perhaps it know what would you do next.
+> "Perhaps it knows what you do next."
 
 If you stay outside, farm or ride aircraft, it keep silent as origin key.
 
@@ -115,10 +117,11 @@ It appears at those scene:
 - Arrange food and wait for alpaca
 - Dialog choose option 1
 - Start challenge remains
+- Lead you go home by bus
 
 It feels upset sometimes, keep patient please.
 
-### 5 🧪 Devlop Tool
+### 5 🧪 Develop Tool
 
 Now you have the ability to write code to recognise the game scene, and define new function.
 
@@ -132,7 +135,7 @@ Now you have the ability to write code to recognise the game scene, and define n
 
 Design notes will be release soon.
 
-Game demo video is making.
+Game demo video cutted completed,  is making icon description or words.
 
 ## Contributing
 
