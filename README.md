@@ -33,6 +33,10 @@ git clone https://github.com/miozus/MyTimeAtPortiaKeymap.git
 1. For once, right click Autohotkey.exe ( win32 or x64w ) , set it run with **Administrator privilige**. Then double click `Portia.ahk`.
 1. Play game ( the order of launcher does not matter ).
 
+## Design Note
+
+If you want to know how does this project code, from 10 lines, grows up to 1500 lines, Read [Design Note](docs/DesignNote.md) with google translator please.
+
 ## Usage
 
 ### 🖱️ Game Mouse

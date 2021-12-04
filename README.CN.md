@@ -12,7 +12,7 @@
 
 - 系统 : Windows 7 / 10 / 11
 - Autohotkey : H-2.0-beta.3 ( @ [thqby/AutoHotkey_H](https://github.com/thqby/AutoHotkey_H.git) )
-- 《我的波西亚时光》版本 : final 2.0.141541 ( last updated time : 2021 / 08 )
+- 《我的波西亚时光》版本 : final 2.0.141541 ( 最后更新日期 : 2021 / 08 )
 - 游戏分辨率： `1680 * 1050` ( 仅限 )
 
 ## 安装
@@ -32,6 +32,10 @@ git clone https://github.com/miozus/MyTimeAtPortiaKeymap.git
    - [x] 必须勾选`重力感应` ， 使得控制鼠标视角过渡自然
 1. 首次使用，右键设置以管理员权限运行 Autohotkey.exe ( win32 / x64w ) , 然后双击打开 `Portia.ahk`。
 1. 开始游戏。（脚本和游戏启动顺序没有影响）
+
+## 设计笔记
+
+如果你想知道，这个项目代码如何从 10 行变成 1500 行的？可以看我的 [设计笔记](docs/DesignNote.md)
 
 ## 使用说明书
 
