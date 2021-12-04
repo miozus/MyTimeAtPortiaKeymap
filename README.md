@@ -35,9 +35,16 @@ git clone https://github.com/miozus/MyTimeAtPortiaKeymap.git
 
 ## Design Note
 
-If you want to know how does this project code, from 10 lines, grows up to 1500 lines, Read [Design Note](docs/DesignNote.md) with google translator please.
+Do you want to know how does this project code, from 10 lines, grows up to 1500 lines ?
+
+Read [Design Note](docs/DesignNote.md) with google translator please.
 
 ## Usage
+
+[![MyTimeAtPortiaKeymap](https://res.cloudinary.com/marcomontalbano/image/upload/v1638631846/video_to_markdown/images/youtube--IKSjKqAa0ww-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://youtu.be/IKSjKqAa0ww "MyTimeAtPortiaKeymap")
+
+<center> Real Game Demo </center>
+
 
 ### 🖱️ Game Mouse
 

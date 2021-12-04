@@ -17,7 +17,7 @@
 
 ## 安装
 
-1. 下载并解压 `.zip` 文件 [下载地址](https://github.com/miozus/MyTimeAtPortiaKeymap/releases/latest) 。或者拉取本项目
+1. 下载并解压 `.zip` 文件 [下载地址](https://gitee.com/ch4li/MyTimeAtPortiaKeymap/releases) 。或者拉取本项目
 
 ```bash
 git clone https://github.com/miozus/MyTimeAtPortiaKeymap.git
@@ -38,6 +38,10 @@ git clone https://github.com/miozus/MyTimeAtPortiaKeymap.git
 如果你想知道，这个项目代码如何从 10 行变成 1500 行的？可以看我的 [设计笔记](docs/DesignNote.md)
 
 ## 使用说明书
+
+[![MyTimeAtPortiaKeymap](https://res.cloudinary.com/marcomontalbano/image/upload/v1638631846/video_to_markdown/images/youtube--IKSjKqAa0ww-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://www.bilibili.com/video/BV1wF41187C1 "我的波西亚时光键位映射")
+
+<center>真机演示</center>
 
 ### 🖱️ 游戏鼠标
 

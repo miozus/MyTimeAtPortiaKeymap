@@ -2,7 +2,7 @@
 
 ![designNote](img/design.gif)
 
-数字键责任链流程
+数字键责任链
 
 ## ⌨️ 物理按键
 
