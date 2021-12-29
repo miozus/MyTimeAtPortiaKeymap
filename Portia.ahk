@@ -4,12 +4,12 @@
 SendMode "Input"	                            ; 快
 SetWorkingDir A_ScriptDir        	            ; 脚本主页
 #Hotif WinActive("ahk_exe Portia.exe")          ; 游戏窗口内生效，其它环境不生效
-SetMouseDelay -1	                            ; 鼠标上下左右，仅 winAPI 生效，但没有真的鼠标控制丝滑（鼠标延迟默认10，改成-1就好了）
+SetMouseDelay -1	                            ; 鼠标上下左右，仅winAPI生效，但没有真的鼠标控制丝滑（鼠标延迟默认10，改成-1就好了）
 CoordMode "Pixel", "Window"                     ; 取色相对于窗口    
-#include PortiaFunctions.ahk                    ; 所有实现功能的源码
-bagCounter := Counter(972, 512, 0)              ; 计数器坐标：背包/工作台/商店; 首次运行创建，关闭脚本时销毁
-workCounter := Counter(1000, 584, 1)
-factoryCounter := Counter(990, 620, 2)
+#include PortiaFunctions.ahk         ; 游戏配置和缓存：优先查询数据，找不到再计算
+bagCounter := Counter(972, 512, CounterConst.icon.ZERO)              ; 计数器坐标：背包/工作台/商店; 首次运行创建，关闭脚本时销毁
+workCounter := Counter(1000, 584, CounterConst.icon.ONE)
+factoryCounter := Counter(990, 620, CounterConst.icon.FACTORY)
 ;=====================================================================o
 
 #SuspendExempt True
@@ -25,7 +25,8 @@ CapsLock::
 Esc::  ExtendKey.Esc()
 *I::   ExtendKey.LButton()
 *O::   ExtendKey.RButton()
-*R::   ExtendKey.Interactive()
+*R::   ExtendKey.bindToggleScript()
+*X::   ExtendKey.bindToggleScript()
 Enter::ExtendKey.Enter()
 ; 不智慧助手
 *Space:: AI.heySiri()
@@ -40,9 +41,9 @@ Enter::ExtendKey.Enter()
 *`;::GameMouse.scroll("⏬")
 ; 开发测试
 ^g:: Scene.whichScene()
-^!g::GameUtils.getMousePosCode()
-!g:: GameUtils.getPixelSearchCode(5)
-^+g::GameUtils.serilize(Counter.dynamicPos)
+^!g::Helper.getMousePosCode()
+!g:: Helper.getPixelSearchCode(5)
+^+g::Helper.serilize(Counter.dynamicPos)
 ; 选择元素
 *1:: Element.select(1)
 *2:: Element.select(2)
@@ -65,6 +66,7 @@ Enter::ExtendKey.Enter()
 *D:: Direction.move("↓")
 #Hotif
 
+
 ;=====================================================================o
 
 ; 🎮 游戏设定
@@ -80,10 +82,10 @@ class GameSetting {
      
     ; 游戏设定常量
     class Constant {
-        ; 底部物品栏个数
-        static itemBarColumns := 8
+        ; 物品栏列数
+        static BAG_ITEM_COLUMNS := 8
         ; 产品每页显示个数（分辨率高会显示更多）
-        static PageSize := 6
+        static PAGE_SIZE := 6
         ; 屏幕分辨率（必须） 1680 * 1050 
     }
     
@@ -92,26 +94,26 @@ class GameSetting {
     ; 键位设置
     class Keyboard {
         ; 替换背包物品
-        static exchange := "g"
+        static EXCHANGE := "g"
         ; 探宝: 或抱起物品
-        static seekingTreasures := "u"
+        static SEEKING_TREASURES := "u"
         ; 交互
-        static interactive := "r"
+        static INTERACTIVE := "r"
         ; 推荐设置
-        static up := "e"
-        static down := "d"
-        static left := "s"
-        static right := "f"
-        static jump := "space"
-        static LClick := "i"
-        static RClick := "o"
-        static switchMonsterTarget := "Alt"
+        static UP := "e"
+        static DOWN := "d"
+        static LEFT := "s"
+        static RIGHT := "f"
+        static JUMP := "space"
+        static LCLICK := "i"
+        static RCLICK := "o"
+        static OPEN_BAG := "x"
+        static SWITCH_MONSTER_TARGET := "Alt"
     }
     
     ; 鼠标移动速度
     class Mouse {
-        static quickSpeed := 97
-        static slowSpeed := 35
+        static QUICK_SPEED := 97
+        static SLOW_SPEED := 35
     }
 }
-

@@ -51,10 +51,10 @@ class Element {
     ; 游戏内置 `Shift + 左键` 拆分道具，所以不要用 `Shift` 来修饰交换装备
     static selectHotKeyPolicy(index) {
         this.selectSceneRouter(index)
-        if (index <= GameSetting.Constant.itemBarColumns) {
+        if (index <= GameSetting.Constant.BAG_ITEM_COLUMNS) {
             up := GameSetting.Keyboard.up
             if GetKeyState("Ctrl", "p") and !GetKeyState(up, "p") {
-                Send GameSetting.Keyboard.exchange
+                Send GameSetting.Keyboard.EXCHANGE
             } else if GetKeyState("LAlt", "p") {
                 Sleep 50
                 Send GameMouse.button("⚙️")
@@ -86,8 +86,8 @@ class Element {
             ListUI.selectAtRelic(index)
         } else if Scene.isChickenHouse() {
             ListUI.selectAtChickenHouse(index)
-        } else if Scene.isFactory() {
-            ListUI.selectAtFacotry(index)
+        } else if Scene.isHome() {
+            ListUI.selectAtHome(index)
         } else if Scene.isDelegation() {
             ListUI.selectAtDelegation(index)
         } else if Scene.isTowerDrink() {
@@ -162,7 +162,7 @@ class AI {
             ; 制作：（冗余操作，但合并了位置变动的按钮，第二个无副作用）
             Click "350 905"
             Click "410 905"
-        } else if Scene.isFactory() {
+        } else if Scene.isHome() {
             ; 同时制造
             Click "1356 816"
         } else if Scene.isBusMap() {
@@ -269,14 +269,14 @@ class Actor {
 ; 🛖 家园工坊
 ; ----
 ; 简化了的畜牧养殖、机电设备、制作道具等重复的机械操作，提供指令集接口，让玩家关心操作以外的事务
-class Factory {
+class Home {
 
     ; 收集和管理：开启工厂和管家艾克后，闲置
     static collectAndManage() {
         ; 收获并进入操作界面
-        Send "{Blind!^}" GameSetting.Keyboard.interactive
+        Send "{Blind!^}" GameSetting.Keyboard.INTERACTIVE
         Sleep 1200
-        Send "{Blind!^}" GameSetting.Keyboard.interactive
+        Send "{Blind!^}" GameSetting.Keyboard.INTERACTIVE
     }
 
     static startWorking() {
@@ -442,7 +442,7 @@ class ListUI {
         this.selectOption(index, 600, 400, 90, 5)
     }
 
-    static selectAtFacotry(index)  {
+    static selectAtHome(index)  {
         this.selectOption(index, 600, 368, 90, 6)
     }
 
@@ -453,6 +453,23 @@ class ListUI {
     static selectAtOrder(index) {
         this.selectOption(index, 820, 420, 80, 4)
     }
+}
+
+; 计数器常量，简化传入参数，避免布尔值和魔法值
+
+class CounterConst {
+     
+    class Icon {
+        static ZERO :=  0
+        static ONE :=  1
+        static FACTORY :=  2
+    }
+    
+    class UseCache {
+        static ON := true
+        static OFF := false
+    }
+
 }
 
 ;=====================================================================o
@@ -578,7 +595,7 @@ class Bag {
     static selectItem(index, originX, originY:=370, dx:=75, dy:=75) {
         ; static this.Ladder := Bag.Ladder
         ; 背包格子列数
-        columns := GameSetting.Constant.itemBarColumns
+        columns := GameSetting.Constant.BAG_ITEM_COLUMNS
         posY := originY
 
         if (index <= columns) {
@@ -726,7 +743,7 @@ class CounterContext {
         ; 带图标：工作台/添加肥料 ; 商店/背包：通用五图标
         if Scene.hasZeroIconCounter() {
             bagCounter.click(button)
-        } else if Scene.isOneIconCounterAtFactory() {
+        } else if Scene.isOneIconCounterAtHome() {
             factoryCounter.click(button)
         } else {
             ; 不仅工作台，而且野外添加肥料(这个突然弹窗，不好识别场景)
@@ -765,8 +782,8 @@ class PageContext {
             Page.ofShop(direction)
         } else if Scene.isMaterialWare() {
             Page.ofMaterialWare(direction)
-        } else if Scene.isFactory() {
-            Tabs.ofFactory(direction)
+        } else if Scene.isHome() {
+            Tabs.ofHome(direction)
         } else if Scene.isSetting() {
             Tabs.ofSetting(direction)
         } else if Scene.isWorkStation() {
@@ -804,10 +821,10 @@ class GameMouse  {
     ;    解决：+ 修饰的 hjkl 是另一套组合键，给鼠标控制 * 最广范围的权限，可以叠加任何按键，充分发挥键位无冲
     ; 3. 设置鼠标延迟为 -1 ，过度自然
     static move(event, offset := 97) {
-        offset := GameSetting.Mouse.quickSpeed
+        offset := GameSetting.Mouse.QUICK_SPEED
         if GetKeyState("a", "p")
         {
-            offset := GameSetting.Mouse.slowSpeed
+            offset := GameSetting.Mouse.SLOW_SPEED
         }
         switch (event)
         {
@@ -855,7 +872,7 @@ class GameMouse  {
 ; 🧪 游戏工具
 ; ---
 ; 辅助写代码的集合：取色，取坐标，序列化二维数组（储存数据库）
-class GameUtils {
+class Helper {
 
    static serilize(nestedObj) {
         inner := "", outer := ""
@@ -1002,7 +1019,7 @@ class Tabs {
         this.carousel(490, 240, 170, 3, direction)
     }
 
-    static ofFactory(direction) {
+    static ofHome(direction) {
         this.carousel(530, 240, 75, 13, direction)
     }
 
@@ -1104,7 +1121,7 @@ class WorkState {
         ; 持续挖矿和踢树
         static kickTreeLoop() {
             loop {
-                Send GameSetting.Keyboard.interactive
+                Send GameSetting.Keyboard.INTERACTIVE
                 Sleep 900
                 if getkeystate("Ctrl", "p") {
                     return
@@ -1119,7 +1136,7 @@ class WorkState {
     ; 状态栏放饭团，按数字键 N 则喂养 N 对成鱼
     class Fisher {
         
-        ; 放入 +10 条鱼
+        ; 放入 -10 条鱼
         static main() {
             loop 10 {
                 GameMouse.button("🖱️")
@@ -1127,10 +1144,10 @@ class WorkState {
             }
         }
 
-        ; 取走 -5 条鱼
+        ; 取走 +5 条鱼
         static assist() {
            loop 5 {
-                Send GameSetting.Keyboard.interactive
+                Send GameSetting.Keyboard.INTERACTIVE
                 Sleep 400
             }
         }
@@ -1161,11 +1178,11 @@ class WorkState {
 
         ; 工厂模板：交给上下文管理的状态动作
         static main() {
-            Factory.startWorking()
+            Home.startWorking()
         }
         
         static assist() {
-            Factory.coninueWorking()
+            Home.coninueWorking()
         }
     }
     
@@ -1213,9 +1230,10 @@ class ExtendKey {
     }
 
     ; 拓展交互按键：如果不在户外，则释放挂起的脚本，激活上下左右翻页
-    static Interactive() {
+    static bindToggleScript() {
+        Tooltip A_ThisHotkey
         Send SubStr(A_ThisHotkey, -1)
-        SetTimer () => this.wait4InteraciveUI(), -2000
+        SetTimer () => ExtendKey.wait4InteraciveUI(), -2000
     }
 
     static wait4InteraciveUI() {
@@ -1342,7 +1360,7 @@ class Scene {
             Scene.isBox() " Box `n"
             Scene.isPlantBag() " PlantBag `n"
             Scene.isMaterialWare() " MaterialWare `n"
-            Scene.isFactory() " Factory `n"
+            Scene.isHome() " Home `n"
             Scene.isCalendar() " Calendar `n"
             Scene.isDialog() " Dialog `n"
             Scene.isOutside() " Outside `n"
@@ -1485,7 +1503,7 @@ class Scene {
     }
     
     ; 计数器：有图标，工厂点击同时制作出现坐标偏移 20dy， 初始位置最大值 [999] 和 [取消]
-    static isOneIconCounterAtFactory() {
+    static isOneIconCounterAtHome() {
         factoryOneIconMax := PixelSearch(&FoundX, &FoundY, 991, 629, 1001, 639, 0x83D766, 3)
         factoryOneIconCancel := PixelSearch(&FoundX, &FoundY, 969, 678, 979, 688, 0xF4AF3D, 3)
         return factoryOneIconMax or factoryOneIconCancel
@@ -1500,7 +1518,7 @@ class Scene {
         return betweenButton and (
             this.isZeroIconCounter() or
             this.isOneIconCounter() or
-            this.isOneIconCounterAtFactory()
+            this.isOneIconCounterAtHome()
         )
     }
     
@@ -1561,7 +1579,7 @@ class Scene {
     }
     
     ; 工厂：最左上角标志的 [黄] 色（和贩卖机重叠了） 锁链 [⛓️]
-    static isFactory() {
+    static isHome() {
         link := PixelSearch(&FoundX, &FoundY, 34, 61, 44, 71, 0xFFFFFF, 3)
         yellow := PixelSearch(&FoundX, &FoundY, 10, 35, 20, 45, 0xFAD260, 3)
         return link and yellow
@@ -1606,7 +1624,6 @@ class Scene {
         return this.HereCache.action["ride"]
     }
     
-    
     ; 切换场景：全屏黑屏，中央是黑色的
     static isSwitching() {
         return PixelSearch(&FoundX, &FoundY, 843, 538, 853, 548, 0x0D0D0D, 3)
@@ -1646,7 +1663,7 @@ class Scene {
 
     static isNormalList() {
         return this.isProductUI() or this.isMission() or this.isRelic() or 
-               this.isChickenHouse() or this.isFactory() or this.isDelegation() or 
+               this.isChickenHouse() or this.isHome() or this.isDelegation() or 
                this.isTowerDrink() or this.isOrder() or this.isManualUI() or
                this.isCookBook()
 
@@ -1662,7 +1679,7 @@ class Scene {
     
     static isLongListUI() {
         return this.isProductUI() or this.isManualUI() or this.isBox() or
-               this.isFactory() or this.isManualUI()
+               this.isHome() or this.isManualUI()
     }
 
     ; 有计数器（弹窗）存在。存在时，记录缓存; Exit 退出，清空缓存
