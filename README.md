@@ -30,7 +30,7 @@ git clone https://github.com/miozus/MyTimeAtPortiaKeymap.git
    - [ ] Setting Reference [Screenshot](docs/img/GameSettingReference.png)
    - [x] Resolution must be `1680 * 1050` .
    - [x] `Lens inertia` must be checked, for move mouse with fluent perfomance.
-1. For once, right click Autohotkey.exe ( win32 or x64w ) , set it run with **Administrator privilige**. Then double click `Portia.ahk`.
+1. For once, right click Autohotkey.exe (x32 or x64 ) , set it run with **Administrator privilige**. Then double click `Portia.ahk`.
 1. Play game ( the order of launcher does not matter ).
 
 ## Design Note

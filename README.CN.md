@@ -30,7 +30,7 @@ git clone https://github.com/miozus/MyTimeAtPortiaKeymap.git
    - [ ] 参考我的设置 [截图](docs/img/GameSettingReference.png)
    - [x] 必须设置游戏分辨率 `1680 * 1050`
    - [x] 必须勾选`重力感应` ， 使得控制鼠标视角过渡自然
-1. 首次使用，右键设置以管理员权限运行 Autohotkey.exe ( win32 / x64w ) , 然后双击打开 `Portia.ahk`。
+1. 首次使用，右键设置以管理员权限运行 Autohotkey.exe ( x32 / x64 ) , 然后双击打开 `Portia.ahk`。
 1. 开始游戏。（脚本和游戏启动顺序没有影响）
 
 ## 设计笔记
